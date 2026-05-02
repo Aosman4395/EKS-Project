@@ -57,3 +57,8 @@ variable "certificate_arn" {
   type        = string
   default     = "arn:aws:acm:eu-west-2:409987738946:certificate/43b4808a-aa96-4cb4-a27e-687336336cb3"
 }
+
+variable "image_tag" {
+  description = "Docker image tag to deploy"
+  type        = string
+}
