@@ -8,14 +8,14 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "eu-west-2"
 }
 
 terraform {
   backend "s3" {
-    bucket       = var.state_bucket
+    bucket       = "ahamed-eks-project-s3"
     key          = "eks-project/terraform.tfstate"
-    region       = var.aws_region
+    region       = "eu-west-2"
     use_lockfile = true
     encrypt      = true
   }
