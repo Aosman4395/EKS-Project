@@ -34,11 +34,6 @@ variable "target_group_port" {
   default     = 8081
 }
 
-variable "vpc_id" {
-  description = "The VPC ID for the Application Load Balancer"
-  type        = string
-}
-
 variable "alb_sg_name" {
   description = "The security group name for the Application Load Balancer"
   type        = string
@@ -62,4 +57,3 @@ variable "certificate_arn" {
   type        = string
   default     = "arn:aws:acm:eu-west-2:409987738946:certificate/43b4808a-aa96-4cb4-a27e-687336336cb3"
 }
-
