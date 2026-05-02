@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store
+
+# Build outputs
+dist
+build
+.tmp
+.cache
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Terraform (VERY IMPORTANT)
+infra/
+*.tf
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# IDE
+.vscode
+.idea
+
+# Tests / coverage
+coverage
+__tests__
+
+# Misc
+*.md
