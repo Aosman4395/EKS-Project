@@ -49,8 +49,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           docker build --no-cache -f Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          trivy image --severity HIGH,CRITICAL --exit-code 1 \
-          --ignorefile .trivyignore \$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG          
+
+          trivy image --severity HIGH,CRITICAL --exit-code 1 --ignorefile .trivyignore "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   terraform-plan:
