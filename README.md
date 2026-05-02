@@ -1,16 +1,24 @@
 ## 📌 Title
 Production-Grade EKS Deployment with GitOps & CI/CD Automation
 
+## 📚 Contents
+- [Tech stack](#️-tech-stack)
+- [Docker Image Build & Local Validation](#-step-1--docker-image-build--local-validation)
+- [Infrastructure as Code (Terraform Setup)](#-step-2--infrastructure-as-code-terraform-setup)
+- [CI/CD Pipeline & Security Scanning](#-step-3--cicd-pipeline--security-scanning)
+
+---
+
 ## 🛠️ Tech Stack
-AWS (EKS, VPC, ALB, IAM)
-Terraform (Infrastructure as Code)
-Docker (Containerisation)
-Kubernetes (EKS)
-Helm (Application Packaging)
-ArgoCD (GitOps Deployment)
-GitHub Actions (CI/CD)
-Prometheus & Grafana (Monitoring)
-ExternalDNS & Cert-Manager (DNS & TLS Automation)
+- AWS (EKS, VPC, ALB, IAM)
+- Terraform (Infrastructure as Code)
+- Docker (Containerisation)
+- Kubernetes (EKS)
+- Helm (Application Packaging)
+- ArgoCD (GitOps Deployment)
+- GitHub Actions (CI/CD)
+- Prometheus & Grafana (Monitoring)
+- ExternalDNS & Cert-Manager (DNS & TLS Automation)
 
 ## 📖 Project Overview
 This project demonstrates a production-grade Kubernetes deployment on AWS EKS using modern DevOps practices.
@@ -53,3 +61,29 @@ Key outcomes of this step:
 - Clean separation between bootstrap and main infrastructure
 - All infrastructure components fully defined and connected
 - Environment ready for CI/CD-driven deployments
+
+## ⚙️ Step 3 – CI/CD Pipeline & Security Scanning
+
+A CI/CD pipeline was implemented using GitHub Actions to automate the build, security validation, and deployment process.
+
+The pipeline is triggered on changes to the application and infrastructure code, ensuring that all updates are consistently validated and deployed without manual intervention.
+
+Security and quality checks were integrated early in the pipeline to enforce best practices and prevent misconfigurations from reaching production.
+
+The pipeline includes:
+
+- **Terraform Validation** to ensure infrastructure code is syntactically correct  
+- **Checkov** for Infrastructure as Code security scanning  
+- **Trivy** for container image vulnerability scanning  
+- **Docker Build & Push** to Amazon ECR using SHA-based image tagging  
+- **AWS Authentication via OIDC** for secure, keyless access  
+- **Terraform Plan & Apply** executed through the pipeline (post-bootstrap)  
+
+Additional enhancements:
+
+- **Concurrency control** to prevent overlapping infrastructure deployments  
+- **Lock timeout configuration** to handle state contention safely  
+- **Separation of bootstrap and main infrastructure execution**  
+- **Production-style workflow** where all changes are applied through CI/CD rather than manually  
+
+This ensures that every deployment is secure, repeatable, and fully automated, aligning with production DevOps best practices.
