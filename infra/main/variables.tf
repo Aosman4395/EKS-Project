@@ -63,8 +63,3 @@ variable "certificate_arn" {
   default     = "arn:aws:acm:eu-west-2:409987738946:certificate/43b4808a-aa96-4cb4-a27e-687336336cb3"
 }
 
-variable "public_subnet_ids" {
-  description = "The IDs of the public subnets for the Application Load Balancer"
-  type        = list(string)
-}
-
