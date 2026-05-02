@@ -11,12 +11,12 @@ module "eks" {
 }
 
 module "alb" {
-  source            = "../modules/alb"
+  source = "../modules/alb"
+
   alb_name          = var.alb_name
   alb_sg_name       = var.alb_sg_name
+  alb_subnets       = module.vpc.public_subnet_ids
   vpc_id            = module.vpc.vpc_id
-  public_subnet_ids = module.vpc.public_subnet_ids
   certificate_arn   = var.certificate_arn
   target_group_port = var.target_group_port
 }
-
