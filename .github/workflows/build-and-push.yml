@@ -20,7 +20,7 @@ permissions:
 
 env:
   AWS_REGION: eu-west-2
-  ECR_REPOSITORY: memos
+  ECR_REPOSITORY: my-ecr-repository
   IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}
 
 jobs:
