@@ -67,3 +67,4 @@ variable "public_subnet_ids" {
   description = "The IDs of the public subnets for the Application Load Balancer"
   type        = list(string)
 }
+
