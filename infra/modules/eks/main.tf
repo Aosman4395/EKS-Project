@@ -19,6 +19,23 @@ resource "aws_eks_cluster" "eks_cluster" {
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_AmazonEKSClusterPolicy]
 }
 
+# Give local user (root) access to EKS
+resource "aws_eks_access_entry" "local_admin" {
+  cluster_name  = aws_eks_cluster.eks_cluster.name
+  principal_arn = "arn:aws:iam::409987738946:root"
+  type          = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "local_admin_admin" {
+  cluster_name  = aws_eks_cluster.eks_cluster.name
+  principal_arn = aws_eks_access_entry.local_admin.principal_arn
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
+}
+
 # IAM role for EKS cluster
 
 resource "aws_iam_role" "eks_cluster_role" {
