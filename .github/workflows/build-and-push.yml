@@ -155,5 +155,3 @@ jobs:
           aws eks wait cluster-active --name memos-eks-cluster --region $AWS_REGION
           kubectl get nodes
           curl --fail https://eks.ahmedo.co.uk
-
-#
