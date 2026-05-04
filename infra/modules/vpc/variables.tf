@@ -19,13 +19,13 @@ variable "public_subnet_cidrs" {
 variable "public_availability_zones" {
   description = "The availability zones for the subnets"
   type        = list(string)
-  default     = ["eu-west-1a", "eu-west-1b"]
+  default     = ["eu-west-2a", "eu-west-2b"]
 }
 
 variable "private_availability_zones" {
   description = "The availability zones for the subnets"
   type        = list(string)
-  default     = ["eu-west-1a", "eu-west-1b"]
+  default     = ["eu-west-2a", "eu-west-2b"]
 }
 
 variable "private_subnet_cidrs" {
