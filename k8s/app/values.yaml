@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 409987738946.dkr.ecr.eu-west-2.amazonaws.com/my-ecr-repository
-  tag: "latest"
+  tag: e722f99d7a218398b4dd4b7d0232ad68d839a2af-25257914754
   pullPolicy: Always
 
 service:
