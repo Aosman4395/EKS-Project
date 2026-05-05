@@ -18,3 +18,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.containerPort }}
+         env:
+            - name: MEMOS_PORT
+              value: "{{ .Values.containerPort }}"
+            - name: MEMOS_ADDR
+              value: "0.0.0.0"
