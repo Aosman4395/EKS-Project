@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: memos
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: memos
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}
