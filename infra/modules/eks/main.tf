@@ -4,17 +4,17 @@ resource "aws_eks_cluster" "eks_cluster" {
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids = var.private_subnet_ids
+    subnet_ids         = var.private_subnet_ids
     security_group_ids = [aws_security_group.eks_cluster_sg.id]
   }
 
   enabled_cluster_log_types = [
-  "api",
-  "audit",
-  "authenticator",
-  "controllerManager",
-  "scheduler"
-]
+    "api",
+    "audit",
+    "authenticator",
+    "controllerManager",
+    "scheduler"
+  ]
 
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_AmazonEKSClusterPolicy]
 }
@@ -67,12 +67,12 @@ resource "aws_eks_node_group" "eks_node_group" {
   node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = var.private_subnet_ids
 
-  instance_types = ["t3.micro"]
+  instance_types = ["t3.small"]
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
-    min_size     = 1
+    desired_size = 2
+    max_size     = 2
+    min_size     = 2
   }
 
   depends_on = [
@@ -135,12 +135,12 @@ resource "aws_security_group_rule" "allow_all_egress" {
 }
 
 resource "aws_security_group_rule" "allow_ingress_alb" {
-  description       = "Allow application traffic from ALB to EKS workloads"
-  type              = "ingress"
-  from_port         = 8081
-  to_port           = 8081
-  protocol          = "tcp"
+  description              = "Allow application traffic from ALB to EKS workloads"
+  type                     = "ingress"
+  from_port                = 8081
+  to_port                  = 8081
+  protocol                 = "tcp"
   source_security_group_id = var.alb_security_group_id
-  security_group_id = aws_security_group.eks_cluster_sg.id
+  security_group_id        = aws_security_group.eks_cluster_sg.id
 }
  
