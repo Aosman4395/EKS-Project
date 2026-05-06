@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: git@github.com:Aosman4395/EKS-Project.git
     targetRevision: main
-    path: k8s/app
+    path: k8s/app/helm
 
   destination:
     server: https://kubernetes.default.svc
