@@ -8,5 +8,5 @@ spec:
     app: memos
   ports:
     - name: http
-      port: {{ .Values.service.port | quote }}
-      targetPort: {{ .Values.containerPort | quote }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.containerPort }}

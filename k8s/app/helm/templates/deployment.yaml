@@ -17,9 +17,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           ports:
-            - containerPort: {{ .Values.containerPort | quote }}
+            - containerPort: {{ .Values.containerPort }}
           env:
             - name: MEMOS_PORT
-              value: "{{ .Values.containerPort | quote }}"
+              value: {{ .Values.containerPort | quote }}
             - name: MEMOS_ADDR
               value: "0.0.0.0"
