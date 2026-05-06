@@ -148,10 +148,10 @@ jobs:
         run: |
           aws eks update-kubeconfig \
             --region $AWS_REGION \
-            --name memos-eks-cluster
+            --name eks-cluster
 
       - name: Verify deployment
         run: |
-          aws eks wait cluster-active --name memos-eks-cluster --region $AWS_REGION
+          aws eks wait cluster-active --name eks-cluster --region $AWS_REGION
           kubectl get nodes
           curl --fail https://eks.ahmedo.co.uk
