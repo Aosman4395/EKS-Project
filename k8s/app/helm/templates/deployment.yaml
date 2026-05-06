@@ -15,11 +15,11 @@ spec:
       containers:
         - name: memos
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
           ports:
-            - containerPort: {{ .Values.containerPort }}
+            - containerPort: {{ .Values.containerPort | quote }}
           env:
             - name: MEMOS_PORT
-              value: "{{ .Values.containerPort }}"
+              value: "{{ .Values.containerPort | quote }}"
             - name: MEMOS_ADDR
               value: "0.0.0.0"

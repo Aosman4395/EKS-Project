@@ -16,3 +16,5 @@ ingress:
   className: nginx
   host: eks.ahmedo.co.uk
   path: /
+  clusterIssuer: letsencrypt-prod
+  tlsSecretName: eks-tls
