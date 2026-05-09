@@ -3,7 +3,7 @@
 
 FROM node:20-alpine AS frontend-builder
 
-RUN corepack enable
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
 
 WORKDIR /src/app/memos/web
 
