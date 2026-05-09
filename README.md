@@ -1,12 +1,17 @@
-## 📌 Title
+## Title
 Production-Grade EKS Deployment with GitOps & CI/CD Automation
 
 ## 📚 Contents
-- [Tech stack](#️-tech-stack)
-- [Docker Image Build & Local Validation](#-step-1--docker-image-build--local-validation)
-- [Infrastructure as Code (Terraform Setup)](#-step-2--infrastructure-as-code-terraform-setup)
-- [CI/CD Pipeline & Security Scanning](#-step-3--cicd-pipeline--security-scanning)
-
+- [Tech Stack](#tech-stack)
+- [Project Overview](#project-overview)
+- [Docker Image Build & Local Validation](#step-1--docker-image-build--local-validation)
+- [Infrastructure as Code Terraform Setup](#step-2--infrastructure-as-code-terraform-setup)
+- [CI/CD Pipeline & Security Scanning](#step-3--cicd-pipeline--security-scanning)
+- [Kubernetes & kubectl Configuration](#step-4--kubernetes--kubectl-configuration)
+- [Helm Deployment Setup](#step-5--helm-deployment-setup)
+- [NGINX Ingress Controller](#step-6--nginx-ingress-controller)
+- [GitOps with ArgoCD](#step-7--gitops-with-argocd)
+- [Cert-Manager & HTTPS Automation](#step-8--cert-manager--https-automation)
 ---
 
 ## 🛠️ Tech Stack
@@ -20,7 +25,7 @@ Production-Grade EKS Deployment with GitOps & CI/CD Automation
 - Prometheus & Grafana (Monitoring)
 - ExternalDNS & Cert-Manager (DNS & TLS Automation)
 
-## 📖 Project Overview
+## Project Overview
 This project demonstrates a production-grade Kubernetes deployment on AWS EKS using modern DevOps practices.
 
 Infrastructure is provisioned using Terraform modules, while CI/CD pipelines automate Docker image builds and deployments.
@@ -31,7 +36,7 @@ The platform includes automated DNS management and TLS certificates, along with 
 
 The result is a fully automated, secure, and scalable cloud-native application deployment accessible over HTTPS.
 
-## 🐳 Step 1 – Docker Image Build & Local Validation
+## Step 1 – Docker Image Build & Local Validation
 
 The application was first containerised and tested locally before any cloud infrastructure was introduced.
 
@@ -39,7 +44,7 @@ A Docker image was built from the application source code to confirm that the Do
 
 The container was then run locally and exposed through a local port to verify that the application started successfully and could be accessed in the browser.
 
-## 🏗️ Step 2 – Infrastructure as Code (Terraform Setup)
+## Step 2 – Infrastructure as Code (Terraform Setup)
 
 The AWS infrastructure was designed and implemented using Terraform, following a modular and production-style approach.
 
@@ -62,7 +67,7 @@ Key outcomes of this step:
 - All infrastructure components fully defined and connected
 - Environment ready for CI/CD-driven deployments
 
-## ⚙️ Step 3 – CI/CD Pipeline & Security Scanning
+## Step 3 – CI/CD Pipeline & Security Scanning
 
 A CI/CD pipeline was implemented using GitHub Actions to automate the build, security validation, and deployment process.
 
@@ -87,3 +92,87 @@ Additional enhancements:
 - **Production-style workflow** where all changes are applied through CI/CD rather than manually  
 
 This ensures that every deployment is secure, repeatable, and fully automated, aligning with production DevOps best practices.
+
+---
+
+## Step 4 – Kubernetes & kubectl Configuration
+
+After the EKS cluster was provisioned, local Kubernetes tooling was configured to allow direct interaction with the cluster.
+
+This included:
+
+- Installing kubectl
+- Installing required AWS CLI dependencies
+- Configuring kubeconfig for EKS access
+- Connecting kubectl to the EKS cluster
+
+Once connected, Kubernetes resources could be deployed and managed directly from the local environment.
+
+---
+
+## Step 5 – Helm Deployment Setup
+
+Helm was introduced to simplify Kubernetes deployments and improve configuration management.
+
+The application manifests were converted into reusable Helm charts, allowing deployment values such as:
+
+- Image tags
+- Replica counts
+- Service ports
+
+to be managed dynamically through values files.
+
+This improved deployment consistency and reduced repetitive Kubernetes configuration.
+
+---
+
+## Step 6 – NGINX Ingress Controller
+
+The NGINX Ingress Controller was deployed into the EKS cluster to manage external HTTP and HTTPS traffic into Kubernetes services.
+
+Ingress resources were configured to expose the application externally through a Kubernetes LoadBalancer.
+
+This phase enabled:
+
+- External traffic routing into Kubernetes
+- LoadBalancer provisioning within AWS
+- DNS accessibility to the application
+- Centralised ingress management for Kubernetes services
+
+The application was successfully accessible externally through the ingress controller.
+
+---
+
+## Step 7 – GitOps with ArgoCD
+
+ArgoCD was deployed into the EKS cluster to implement a GitOps workflow.
+
+ArgoCD continuously monitors the GitHub repository and automatically synchronises Kubernetes manifests and Helm chart changes into the cluster.
+
+An `application.yaml` resource was created to define the GitOps deployment configuration, including:
+
+- GitHub repository source
+- Target Kubernetes namespace
+- Helm chart path
+- Automatic sync policy
+
+This allowed ArgoCD to continuously watch the repository and automatically apply any new Kubernetes or Helm changes directly into the cluster.
+
+The setup established fully automated GitOps-based deployments from GitHub into Kubernetes without requiring manual kubectl deployments.
+
+---
+
+## Step 8 – Cert-Manager & HTTPS Automation
+
+Cert-Manager was deployed into the Kubernetes cluster to automate TLS certificate management.
+
+AWS Route53 was used for DNS validation to allow automatic certificate issuance.
+
+ClusterIssuer resources were configured to request and manage certificates for Kubernetes ingress resources.
+
+This enabled:
+
+- Automated HTTPS certificate generation
+- Automatic certificate renewal
+- Secure HTTPS access to applications exposed through ingress
+- Integration between Kubernetes ingress and Route53 DNS validation
