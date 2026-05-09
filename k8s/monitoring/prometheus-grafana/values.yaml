@@ -1,0 +1,37 @@
+grafana:
+  enabled: true
+
+  adminPassword: admin123
+
+  service:
+    type: ClusterIP
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - grafana.ahmedo.co.uk
+    path: /
+    pathType: Prefix
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.ahmedo.co.uk
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    retention: 7d
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+
+alertmanager:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
