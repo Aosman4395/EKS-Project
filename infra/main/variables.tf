@@ -62,3 +62,8 @@ variable "image_tag" {
   description = "Docker image tag to deploy"
   type        = string
 }
+
+variable "hosted_zone_id" {
+  description = "The ID of the Route53 hosted zone"
+  type        = string
+}

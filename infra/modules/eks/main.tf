@@ -116,6 +116,24 @@ resource "aws_iam_role_policy_attachment" "ecr_read_only" {
 }
 
 
+# TLS certificate data blocks
+data "tls_certificate" "eks_oidc" {
+  url = aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer
+}
+
+# IAM OIDC provider for IRSA
+resource "aws_iam_openid_connect_provider" "eks" {
+  url = aws_eks_cluster.eks_cluster.identity[0].oidc[0].issuer
+
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+
+  thumbprint_list = [
+    data.tls_certificate.eks_oidc.certificates[0].sha1_fingerprint
+  ]
+}
+
 #Security group for EKS cluster
 
 resource "aws_security_group" "eks_cluster_sg" {

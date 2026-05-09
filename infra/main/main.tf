@@ -27,3 +27,14 @@ module "eks" {
   alb_security_group_id = module.sgs.alb_sg_id
   vpc_id                = module.vpc.vpc_id
 }
+
+module "external_dns_iam" {
+  source = "../modules/iam-external-dns"
+
+  eks_cluster_name     = var.eks_cluster_name
+  hosted_zone_id       = var.hosted_zone_id
+  oidc_provider_arn    = module.eks.oidc_provider_arn
+  oidc_provider_url    = module.eks.oidc_provider_url
+  namespace            = "external-dns"
+  service_account_name = "external-dns"
+}
