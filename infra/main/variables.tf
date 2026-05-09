@@ -66,4 +66,5 @@ variable "image_tag" {
 variable "hosted_zone_id" {
   description = "The ID of the Route53 hosted zone"
   type        = string
+  default = "Z04950413AJQ7IMVP452D"
 }
