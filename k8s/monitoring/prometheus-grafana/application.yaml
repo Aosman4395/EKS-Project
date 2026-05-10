@@ -11,8 +11,51 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 84.5.0
     helm:
-      valueFiles:
-        - values.yaml
+      values: |
+        crds:
+          enabled: false
+
+        grafana:
+          enabled: true
+          adminPassword: admin123
+
+          service:
+            type: ClusterIP
+
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.ahmedo.co.uk
+            path: /
+            pathType: Prefix
+            annotations:
+              kubernetes.io/ingress.class: nginx
+              cert-manager.io/cluster-issuer: letsencrypt-prod
+              external-dns.alpha.kubernetes.io/hostname: grafana.ahmedo.co.uk
+            tls:
+              - secretName: grafana-tls
+                hosts:
+                  - grafana.ahmedo.co.uk
+
+        prometheus:
+          enabled: true
+          prometheusSpec:
+            retention: 7d
+            serviceMonitorSelectorNilUsesHelmValues: false
+            podMonitorSelectorNilUsesHelmValues: false
+
+        alertmanager:
+          enabled: true
+
+        nodeExporter:
+          enabled: false
+
+        prometheus-node-exporter:
+          enabled: false
+
+        kubeStateMetrics:
+          enabled: true
 
   destination:
     server: https://kubernetes.default.svc
