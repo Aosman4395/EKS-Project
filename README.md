@@ -1,5 +1,4 @@
-## Title
-Production-Grade EKS Deployment with GitOps & CI/CD Automation
+## End-to-End Production Kubernetes Platform on AWS EKS
 
 ## Contents
 - [Project Demo](#project-demo)
