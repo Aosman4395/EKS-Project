@@ -1,7 +1,8 @@
 ## Title
 Production-Grade EKS Deployment with GitOps & CI/CD Automation
 
-## 📚 Contents
+## Contents
+- [Project Demo](#project-demo)
 - [Tech Stack](#tech-stack)
 - [Project Overview](#project-overview)
 - [Docker Image Build & Local Validation](#step-1--docker-image-build--local-validation)
@@ -12,7 +13,13 @@ Production-Grade EKS Deployment with GitOps & CI/CD Automation
 - [NGINX Ingress Controller](#step-6--nginx-ingress-controller)
 - [GitOps with ArgoCD](#step-7--gitops-with-argocd)
 - [Cert-Manager & HTTPS Automation](#step-8--cert-manager--https-automation)
+- [ExternalDNS Automation](#step-9--externaldns-automation)
+- [Prometheus & Grafana Monitoring](#step-10--prometheus--grafana-monitoring)
 ---
+
+## Project Demo
+
+https://www.loom.com/share/261b0bff46ce4b328be2915450f97147
 
 ## 🛠️ Tech Stack
 - AWS (EKS, VPC, ALB, IAM)
@@ -176,3 +183,44 @@ This enabled:
 - Automatic certificate renewal
 - Secure HTTPS access to applications exposed through ingress
 - Integration between Kubernetes ingress and Route53 DNS validation
+
+---
+
+## 🌍 Step 9 – ExternalDNS Automation
+
+ExternalDNS was deployed to automate DNS record management for Kubernetes ingress resources.
+
+The setup was implemented using a Helm chart, allowing ExternalDNS to be installed and configured cleanly through Kubernetes values rather than manual manifests.
+
+Terraform was used to provision the required IAM permissions for Route53 access. IAM Roles for Service Accounts were configured so the ExternalDNS pod could securely assume an AWS IAM role without using static AWS access keys.
+
+The Terraform configuration included the required Route53 permissions and was connected to the EKS OIDC provider so ExternalDNS could authenticate securely from inside the cluster.
+
+This enabled ExternalDNS to automatically detect Kubernetes ingress hostnames and create or update the correct DNS records in Route53.
+
+This removed the need to manually create DNS records and allowed application domains to be managed directly from Kubernetes ingress configuration.
+
+---
+
+## 📊 Step 10 – Prometheus & Grafana Monitoring
+
+Prometheus and Grafana were deployed as the final observability layer for the EKS platform.
+
+The monitoring stack was installed using Helm, providing a repeatable and maintainable way to deploy monitoring components into the Kubernetes cluster.
+
+Prometheus was used to collect metrics from the cluster, including pods, nodes, namespaces, and services.
+
+Grafana was used to visualise these metrics through dashboards, giving visibility into the health and performance of the Kubernetes environment.
+
+The monitoring setup provides visibility into:
+
+- Pod health and status
+- Node resource usage
+- CPU and memory consumption
+- Namespace-level metrics
+- Service and workload performance
+- Ingress-related traffic visibility
+
+Grafana was exposed through the existing NGINX ingress setup, with ExternalDNS automatically creating the Route53 DNS record and Cert-Manager provisioning and renewing the HTTPS certificate.
+
+This completed the platform by adding observability on top of the automated EKS, GitOps, DNS, and TLS workflow.
