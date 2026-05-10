@@ -108,7 +108,6 @@ After the EKS cluster was provisioned, local Kubernetes tooling was configured t
 This included:
 
 - Installing kubectl
-- Installing required AWS CLI dependencies
 - Configuring kubeconfig for EKS access
 - Connecting kubectl to the EKS cluster
 
@@ -127,6 +126,9 @@ The application manifests were converted into reusable Helm charts, allowing dep
 - Service ports
 
 to be managed dynamically through values files.
+
+**From this point onward, all additional Kubernetes components—including NGINX Ingress Controller, ArgoCD, Cert-Manager, ExternalDNS, and the Prometheus/Grafana monitoring stack—were deployed and managed using Helm charts**.
+
 
 This improved deployment consistency and reduced repetitive Kubernetes configuration.
 
@@ -185,7 +187,7 @@ This enabled:
 
 ---
 
-## 🌍 Step 9 – ExternalDNS Automation
+## Step 9 – ExternalDNS Automation
 
 ExternalDNS was deployed to automate DNS record management for Kubernetes ingress resources.
 
@@ -201,7 +203,7 @@ This removed the need to manually create DNS records and allowed application dom
 
 ---
 
-## 📊 Step 10 – Prometheus & Grafana Monitoring
+## Step 10 – Prometheus & Grafana Monitoring
 
 Prometheus and Grafana were deployed as the final observability layer for the EKS platform.
 
@@ -223,3 +225,11 @@ The monitoring setup provides visibility into:
 Grafana was exposed through the existing NGINX ingress setup, with ExternalDNS automatically creating the Route53 DNS record and Cert-Manager provisioning and renewing the HTTPS certificate.
 
 This completed the platform by adding observability on top of the automated EKS, GitOps, DNS, and TLS workflow.
+
+## Conclusion
+
+This project demonstrates the design and implementation of a fully automated, production-grade Kubernetes platform on AWS EKS.
+
+It combines Infrastructure as Code with Terraform, secure CI/CD with GitHub Actions, GitOps with ArgoCD, automated DNS and TLS management using ExternalDNS and Cert-Manager, and full observability through Prometheus and Grafana.
+
+The result is a scalable, secure, and maintainable cloud-native platform that reflects real-world DevOps and Platform Engineering practices.
