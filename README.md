@@ -1,6 +1,7 @@
 ## End-to-End Production Kubernetes Platform on AWS EKS
 
 ## Contents
+- [Architecture Diagram](#architechture-diagram)
 - [Project Demo](#project-demo)
 - [Tech Stack](#tech-stack)
 - [Project Overview](#project-overview)
@@ -15,6 +16,10 @@
 - [ExternalDNS Automation](#step-9--externaldns-automation)
 - [Prometheus & Grafana Monitoring](#step-10--prometheus--grafana-monitoring)
 ---
+
+## Architechture Diagram
+
+![diagram](screenshots/eks-diagram.png)
 
 ## Project Demo
 
