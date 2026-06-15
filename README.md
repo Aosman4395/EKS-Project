@@ -19,7 +19,7 @@
 
 ## Architechture Diagram
 
-![diagram](screenshots/eks-diagram.png)
+![diagram](screenshots/Eks_Diagram.png)
 
 ## Project Demo
 
