@@ -15,6 +15,7 @@
 - [Cert-Manager & HTTPS Automation](#step-8--cert-manager--https-automation)
 - [ExternalDNS Automation](#step-9--externaldns-automation)
 - [Prometheus & Grafana Monitoring](#step-10--prometheus--grafana-monitoring)
+- [Future Improvements](#future-improvements)
 ---
 
 ## Architechture Diagram
@@ -231,10 +232,31 @@ Grafana was exposed through the existing NGINX ingress setup, with ExternalDNS a
 
 This completed the platform by adding observability on top of the automated EKS, GitOps, DNS, and TLS workflow.
 
-## Conclusion
+## Future Improvements
 
-This project demonstrates the design and implementation of a fully automated, production-grade Kubernetes platform on AWS EKS.
+This project establishes the core foundation of a production-grade EKS platform. A future iteration would extend the architecture with additional scalability, resilience, security, and application-level infrastructure.
 
-It combines Infrastructure as Code with Terraform, secure CI/CD with GitHub Actions, GitOps with ArgoCD, automated DNS and TLS management using ExternalDNS and Cert-Manager, and full observability through Prometheus and Grafana.
+Planned improvements include:
 
-The result is a scalable, secure, and maintainable cloud-native platform that reflects real-world DevOps and Platform Engineering practices.
+- **Horizontal Pod Autoscaler (HPA)** – Automatically scale application pods based on workload demand and resource utilisation.
+- **Karpenter** – Introduce dynamic EKS node provisioning so cluster compute capacity can scale based on pod requirements.
+- **PostgreSQL** – Add a persistent relational database for application data using Kubernetes StatefulSets and persistent storage.
+- **Redis** – Introduce an in-cluster caching layer with persistent storage and AOF persistence.
+- **Amazon SQS & DLQ** – Add asynchronous event-driven communication between services, with a Dead Letter Queue for failed messages.
+- **HashiCorp Vault** – Replace Kubernetes-managed application secrets with centralised secrets management and controlled secret delivery.
+- **EBS CSI Driver** – Provide dynamic persistent EBS volumes for stateful workloads such as PostgreSQL and Redis.
+- **StorageClasses & Volume Snapshots** – Introduce production-style persistent storage configuration, encryption, backups, and recovery.
+- **Multiple Microservices** – Expand from a single application into a microservices architecture with independently deployable services.
+- **Resource Requests & Limits** – Define CPU and memory requirements for workloads to improve scheduling and cluster stability.
+- **Pod Disruption Budgets** – Protect application availability during voluntary disruptions such as node maintenance.
+- **Pod Priority & PriorityClasses** – Ensure critical platform and application workloads receive scheduling priority.
+- **Topology Spread Constraints** – Distribute application replicas across nodes and Availability Zones for improved resilience.
+- **Network Policies** – Restrict pod-to-pod communication and enforce least-privilege networking inside the cluster.
+- **RBAC Hardening** – Introduce more granular Kubernetes permissions for users, workloads, and platform components.
+- **Kubernetes Security Hardening** – Strengthen workloads with non-root containers, security contexts, restricted capabilities, and least-privilege access.
+- **Improved Observability** – Expand Prometheus and Grafana with application-specific metrics, dashboards, and alerting.
+- **Backup & Disaster Recovery** – Introduce automated database, persistent-volume, and configuration recovery procedures.
+- **Multi-Environment GitOps** – Extend Argo CD to manage separate development, staging, and production environments from Git.
+- **Automated Image Updates** – Extend the GitOps workflow so newly approved container image versions can be promoted through Git rather than requiring manual manifest changes.
+
+These improvements would evolve the current platform from a production-style EKS deployment into a more complete, highly available microservices platform capable of supporting stateful workloads, event-driven processing, automatic scaling, stronger security, and more advanced operational requirements.
